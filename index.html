@@ -74,7 +74,7 @@ h2::after { content:""; display:block; width:60px; height:3px; background:var(--
 
 </style>
 </head>
-<!-- Image Modal -->
+
 <div id="imgModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
   <span id="closeModal" class="absolute top-6 right-10 text-white text-4xl cursor-pointer">&times;</span>
   <img id="modalImg" class="max-h-[90%] max-w-[90%] rounded-lg shadow-2xl">
@@ -82,7 +82,7 @@ h2::after { content:""; display:block; width:60px; height:3px; background:var(--
 
 <body>
 
-<!-- Navbar -->
+
 <nav>
   <div class="text-2xl font-bold tracking-wide">Renad Portfolio</div>
   <div>
@@ -95,7 +95,7 @@ h2::after { content:""; display:block; width:60px; height:3px; background:var(--
   </div>
 </nav>
 
-<!-- About Section -->
+
 <section id="about" class="active">
   <h2 class="text-4xl font-bold mb-4"><span id="typingTitle"></span></h2>
   <p class="text-lg leading-relaxed">IT student | cybersecurity path/security Enthusiast | Data-Driven Thinker
@@ -110,7 +110,6 @@ I believe in consistency, curiosity, and creating real value in every team I joi
 <section id="skills" class="hidden">
   <h2 class="text-4xl font-bold mb-6">Skills</h2>
 
-  <!-- Networking Skills -->
   <h3 class="text-2xl font-semibold mb-2 mt-4">Networking Skills</h3>
   <div class="skills flex flex-wrap gap-4">
     <div class="card flex-1 min-w-[220px]">
@@ -131,7 +130,7 @@ I believe in consistency, curiosity, and creating real value in every team I joi
     </div>
   </div>
 
-  <!-- cybersecurity path/security Skills -->
+
   <h3 class="text-2xl font-semibold mb-2 mt-6">cybersecurity path/security Skills</h3>
   <div class="skills flex flex-wrap gap-4">
     <div class="card flex-1 min-w-[220px]">
@@ -156,7 +155,7 @@ I believe in consistency, curiosity, and creating real value in every team I joi
     </div>
   </div>
 
-  <!-- Data & Analytical Skills -->
+
   <h3 class="text-2xl font-semibold mb-2 mt-6">Data & Analytical Skills</h3>
   <div class="skills flex flex-wrap gap-4">
     <div class="card flex-1 min-w-[220px]">
@@ -177,7 +176,7 @@ I believe in consistency, curiosity, and creating real value in every team I joi
     </div>
   </div>
 
-  <!-- Programming Skills -->
+
   <h3 class="text-2xl font-semibold mb-2 mt-6">Programming Skills</h3>
   <div class="skills flex flex-wrap gap-4">
     <div class="card flex-1 min-w-[220px]">
@@ -202,7 +201,7 @@ I believe in consistency, curiosity, and creating real value in every team I joi
     </div>
   </div>
 
-  <!-- Tools & Platforms -->
+
   <h3 class="text-2xl font-semibold mb-2 mt-6">Tools & Platforms</h3>
   <div class="skills flex flex-wrap gap-4">
     <div class="card flex-1 min-w-[220px]">
@@ -219,7 +218,7 @@ I believe in consistency, curiosity, and creating real value in every team I joi
     </div>
   </div>
 
-  <!-- Soft Skills & Professional Strengths -->
+
   <h3 class="text-2xl font-semibold mb-2 mt-6">Soft Skills & Professional Strengths</h3>
   <div class="skills flex flex-wrap gap-4">
     <div class="card flex-1 min-w-[220px]">
@@ -242,13 +241,13 @@ I believe in consistency, curiosity, and creating real value in every team I joi
 </section>
 
 
-<!-- Projects Section -->
+
 <section id="projects" class="hidden">
   <h2 class="text-4xl font-bold mb-6">Projects</h2>
   <div class="projects" id="projectsContainer"></div>
 </section>
 
-<!-- Certificates Section -->
+
 <section id="certificates" class="hidden">
   <h2 class="text-4xl font-bold mb-6">Certificates</h2>
   <p class="mb-6 text-lg leading-relaxed">
@@ -303,7 +302,7 @@ I believe in consistency, curiosity, and creating real value in every team I joi
   </div>
 </section>
 
-<!-- Contact Section -->
+
 <section id="contact" class="hidden">
   <h2 class="text-4xl font-bold mb-6">Contact Me</h2>
   <div class="card flex flex-col md:flex-row items-center gap-6 p-6">
@@ -351,8 +350,7 @@ let cyberIndex = 0;
 const cyberSlider = document.getElementById("cyberSlider");
 const cyberTitle = document.getElementById("cyberTitle");
 
-// أول صورة تظهر مباشرة عند الدخول
-cyberSlider.src = cyberImages[cyberIndex];
+  cyberSlider.src = cyberImages[cyberIndex];
 cyberTitle.textContent = cyberTitles[cyberIndex];
 
 function nextCyber() {
@@ -369,7 +367,7 @@ function prevCyber() {
 
 
 
-  // Image Zoom Modal
+ 
 const modal = document.getElementById("imgModal");
 const modalImg = document.getElementById("modalImg");
 const closeModal = document.getElementById("closeModal");
@@ -387,7 +385,6 @@ closeModal.addEventListener("click", () => {
   modal.classList.remove("flex");
 });
 
-  // Navigation
   function showSection(id){
     document.querySelectorAll('section').forEach(sec=>sec.classList.add('hidden'));
     const sec=document.getElementById(id);
@@ -397,14 +394,14 @@ closeModal.addEventListener("click", () => {
     document.querySelector(`nav a[onclick="showSection('${id}')"]`).classList.add('active');
   }
 
-  // Dark Mode
+  
   const darkToggle=document.getElementById("darkToggle");
   darkToggle.addEventListener("click",()=>{
     document.body.classList.toggle("dark");
     darkToggle.textContent=document.body.classList.contains("dark")?"☀ Light Mode":"🌙 Dark Mode";
   });
 
-  // Random Fact
+ 
   const facts=[
     "Coffee fuels my coding sessions.",
     "Building projects is my way to learn.",
@@ -414,7 +411,7 @@ closeModal.addEventListener("click", () => {
   ];
   document.getElementById("randomFact").textContent=facts[Math.floor(Math.random()*facts.length)];
 
-  // Typing Effect
+  
   const title="Hi! I'm Renad Abdulkarim Alsuhibany";
   let index=0;
   function typeTitle(){
@@ -425,7 +422,7 @@ closeModal.addEventListener("click", () => {
   }
   typeTitle();
 
-  // Projects Data
+
 const projectsData = [
   {
     name: "🚁 Drone Management & Monitoring System",
@@ -553,7 +550,7 @@ Algorithm Analysis, Time Complexity Evaluation, Cryptography Fundamentals, Logic
   }
 ];
 
-// Rendering Projects Dynamically
+
 const projectsContainer = document.getElementById("projectsContainer");
 projectsContainer.innerHTML = ""; 
 projectsData.forEach(p => {
