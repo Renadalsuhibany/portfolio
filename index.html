@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renad Portfolio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root { --bg:#f3f4f6; --text:#111827; --card:#ffffff; --accent:#3b82f6; }
+body.dark { --bg:#1e1e2f; --text:#f0f0f0; --card:#2c2c3d; --accent:#60a5fa; }
+body { background-color:var(--bg); color:var(--text); font-family:Arial, sans-serif; margin:0; transition:0.3s; scroll-behavior:smooth; }
+nav { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; background-color:var(--card); box-shadow:0 4px 10px rgba(0,0,0,0.1); position:sticky; top:0; z-index:10; border-bottom:1px solid rgba(0,0,0,0.05); }
+nav a { margin:0 0.5rem; cursor:pointer; font-weight:500; transition:0.3s; }
+nav a:hover, nav a.active { color:var(--accent); font-weight:bold; }
+section { padding:6rem 2rem; opacity:0; transition:opacity 0.6s ease; }
+section.active { opacity:1; }
+.card { background-color:var(--card); padding:1.5rem; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.1); transition:transform 0.3s; }
+.card:hover { transform:translateY(-5px); box-shadow:0 12px 25px rgba(0,0,0,0.2); }
+.skills, .projects, .certificates { display:flex; flex-wrap:wrap; gap:1.5rem; }
+.skills .card, .projects .card, .certificates .card { flex:1 1 220px; }
+.fact { font-style:italic; margin-top:1rem; font-size:1.1rem; }
+button { cursor:pointer; padding:0.5rem 1rem; border-radius:8px; border:none; background-color:var(--accent); color:white; font-weight:bold; transition:0.3s; }
+button:hover { background-color:#2563eb; }
+.skills-bar {
+  height: 15px;
+  border-radius: 12px;
+  background-color: #e5e7eb; 
+  overflow: hidden;
+  margin-top: 0.5rem;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.skills-fill {
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa); 
+  color: white;
+  font-weight: bold;
+  text-align: right;
+  padding-right: 6px;
+  line-height: 15px;
+  width: 0;
+  animation: fillAnim 1s ease forwards; /* Animation */
+}
+
+@keyframes fillAnim {
+  0% { width: 0; }
+  100% { width: var(--fill-width); } 
+}
+
+.certificates img { 
+  width:100%; 
+  height:300px; 
+  object-fit:contain; 
+  border-radius:12px; 
+  transition:0.3s; 
+}
+#cyberSlider {
+  width:100%;
+  height:300px;
+  object-fit:contain;
+  border-radius:12px;
+}
+
+.certificates img:hover { transform:scale(1.05); }
+input, textarea { width:100%; padding:0.5rem; margin-top:0.5rem; border-radius:6px; border:1px solid #ccc; background-color:var(--card); color:var(--text); }
+h2::after { content:""; display:block; width:60px; height:3px; background:var(--accent); margin-top:6px; border-radius:2px; }
+.certificates .card {
+  min-height: 300px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+</style>
+</head>
+<!-- Image Modal -->
+<div id="imgModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
+  <span id="closeModal" class="absolute top-6 right-10 text-white text-4xl cursor-pointer">&times;</span>
+  <img id="modalImg" class="max-h-[90%] max-w-[90%] rounded-lg shadow-2xl">
+</div>
+
+<body>
+
+<!-- Navbar -->
+<nav>
+  <div class="text-2xl font-bold tracking-wide">Renad Portfolio</div>
+  <div>
+    <a onclick="showSection('about')" class="active">About</a>
+    <a onclick="showSection('skills')">Skills</a>
+    <a onclick="showSection('projects')">Projects</a>
+    <a onclick="showSection('certificates')">Certificates</a>
+    <a onclick="showSection('contact')">Contact</a>
+    <button id="darkToggle">🌙 Dark Mode</button>
+  </div>
+</nav>
+
+<!-- About Section -->
+<section id="about" class="active">
+  <h2 class="text-4xl font-bold mb-4"><span id="typingTitle"></span></h2>
+  <p class="text-lg leading-relaxed">IT student | cybersecurity path/security Enthusiast | Data-Driven Thinker
+
+I am an Information Technology student at Princess Nourah bint Abdulrahman University, with a strong academic record . I am passionate about cybersecurity path/security, data analytics, and software development.
+
+I enjoy transforming ideas into practical solutions, participating in hackathons, and working within collaborative environments where innovation and problem-solving are valued. my goal is to contribute to impactful technical projects while continuously developing my technical and analytical skills.
+
+I believe in consistency, curiosity, and creating real value in every team I join.</p>
+  <p class="fact" id="randomFact"></p>
+</section>
+<section id="skills" class="hidden">
+  <h2 class="text-4xl font-bold mb-6">Skills</h2>
+
+  <!-- Networking Skills -->
+  <h3 class="text-2xl font-semibold mb-2 mt-4">Networking Skills</h3>
+  <div class="skills flex flex-wrap gap-4">
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Protocols & Models</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:93%">93%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>IP Addressing & Subnetting</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:98%">98%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Routing & Switching Fundamentals</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:95%">95%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>OSI & TCP/IP Models</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
+    </div>
+  </div>
+
+  <!-- cybersecurity path/security Skills -->
+  <h3 class="text-2xl font-semibold mb-2 mt-6">cybersecurity path/security Skills</h3>
+  <div class="skills flex flex-wrap gap-4">
+    <div class="card flex-1 min-w-[220px]">
+      <h4>cybersecurity path/security Fundamentals</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:98%">98%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Network Security</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Linux (Kali)</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:93%">93%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Log Monitoring & Threat Analysis</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:75%">75%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Common Attack Types Understanding</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
+    </div>
+  </div>
+
+  <!-- Data & Analytical Skills -->
+  <h3 class="text-2xl font-semibold mb-2 mt-6">Data & Analytical Skills</h3>
+  <div class="skills flex flex-wrap gap-4">
+    <div class="card flex-1 min-w-[220px]">
+      <h4>SQL</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Excel</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:95%">95%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Power BI</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Tableau Dashboards</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:75%">75%</div></div>
+    </div>
+  </div>
+
+  <!-- Programming Skills -->
+  <h3 class="text-2xl font-semibold mb-2 mt-6">Programming Skills</h3>
+  <div class="skills flex flex-wrap gap-4">
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Python</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Java</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>HTML</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>CSS</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>JavaScript</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:75%">75%</div></div>
+    </div>
+  </div>
+
+  <!-- Tools & Platforms -->
+  <h3 class="text-2xl font-semibold mb-2 mt-6">Tools & Platforms</h3>
+  <div class="skills flex flex-wrap gap-4">
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Git & GitHub</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>VS Code</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Oracle Database</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:80%">80%</div></div>
+    </div>
+  </div>
+
+  <!-- Soft Skills & Professional Strengths -->
+  <h3 class="text-2xl font-semibold mb-2 mt-6">Soft Skills & Professional Strengths</h3>
+  <div class="skills flex flex-wrap gap-4">
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Teamwork</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:95%">95%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Communication</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Problem Solving</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
+    </div>
+    <div class="card flex-1 min-w-[220px]">
+      <h4>Time Management</h4>
+      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Projects Section -->
+<section id="projects" class="hidden">
+  <h2 class="text-4xl font-bold mb-6">Projects</h2>
+  <div class="projects" id="projectsContainer"></div>
+</section>
+
+<!-- Certificates Section -->
+<section id="certificates" class="hidden">
+  <h2 class="text-4xl font-bold mb-6">Certificates</h2>
+  <p class="mb-6 text-lg leading-relaxed">
+ I have completed several professional certifications and technical training programs to strengthen my knowledge in cybersecurity, networking, data analytics, and software development.
+  These certifications reflect my commitment to continuous learning and professional growth.
+
+  </p>
+  <div class="certificates">
+    <div class="card"><img src="images/5803065854663527575_121.jpg"class="zoomable" alt="Certificate 1"><h4 class="font-bold mt-2"> Google Data Analytics</h4><p>Google</p></div>
+    <div class="card"><img src="images/5803065854663527864_121.jpg"class="zoomable" alt="Certificate 2"><h4 class="font-bold mt-2">CCNA</h4><p>Cisco</p></div>
+    <div class="card"><img src="images/5803065854663527581_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Oracle Database Foundations</h4><p>Oracle</p></div>
+     <div class="card"><img src="images/5803065854663527580_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Oracle Java Certification</h4><p>Oracle</p></div>
+     <div class="card"><img src="images/6010589702215813400_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">cybersecurity path/security Fundamentals</h4><p>Tuwaiq Academy</p></div>
+      <div class="card"><img src="images/5803065854663527571_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Raspberry pi Fundamentals</h4><p>Tuwaiq Academy</p></div>
+       <div class="card"><img src="images/5803065854663527863_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Front-End Development using React </h4><p>Tuwaiq Academy</p></div>
+        <div class="card"><img src="images/5803065854663527578_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Excel Essential Training</h4><p>LinkedIn Learning</p></div>
+        <div class="card"><img src="images/5803065854663527856_120.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Volunteer with Keswat farah</h4><p>Keswat farah</p></div>
+<div class="card"><img src="images/5803065854663527577_120.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Intro to Financial Sustainability</h4><p>BSF</p></div>
+<div class="card"><img src="images/5803065854663527576_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Entrepreneurship Learning Pathway</h4><p>LinkedIn Learning</p></div>
+<div class="card"><img src="images/5803065854663527574_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Fundamentals of Product Management</h4><p>Barmajon</p></div>
+<div class="card"><img src="images/5803065854663527572_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Fundamentals of Artificial Intelligence</h4><p>SDAIA</p></div>
+<div class="card"><img src="images/5803065854663527570_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Quantum Computing For Everyone</h4><p>Coursera</p></div>
+<div class="card"><img src="images/M3aarf_Certificate_page-0001.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Information Security</h4><p>Maarf</p></div>
+
+<div class="card relative">
+  <img id="cyberSlider" 
+       src="images/cybersecurity-path/Linux-101_page-0001.jpg"
+       class="zoomable w-full h-40 object-cover rounded-lg">
+
+  <button onclick="prevCyber()" 
+    class="absolute left-2 top-1/2 -translate-y-1/2 bg-white px-2 py-1 rounded shadow">
+    ◀
+  </button>
+
+  <button onclick="nextCyber()" 
+    class="absolute right-2 top-1/2 -translate-y-1/2 bg-white px-2 py-1 rounded shadow">
+    ▶
+  </button>
+  
+  <h4 id="cyberTitle" class="font-bold mt-2">Cybersecurity Path</h4>
+  <p id="cyberDesc">Sater</p>
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="hidden">
+  <h2 class="text-4xl font-bold mb-6">Contact Me</h2>
+  <div class="card flex flex-col md:flex-row items-center gap-6 p-6">
+    <div class="flex flex-col items-center md:items-start">
+      <img src="profile.png"class="zoomable" alt="Profile" class="w-32 h-32 rounded-full mb-4 shadow-lg">
+      <h3 class="text-xl font-bold">Renad alsuhibany</h3>
+      <p class="text-gray-500 mb-2">IT student</p>
+      <p>Email: <a href="mailto:Renadsuh@icloud.com" class="text-blue-500">Renadsuh@icloud.com</a></p>
+      <p>Phone: <a href="tel:+966 570086584" class="text-blue-500">+966 570086584</a></p>
+      <p>GitHub: <a href="https://github.com/renadalsuhibany" target="_blank" class="text-blue-500">https://github.com/renadalsuhibany</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/renad-alsuhibany" target="_blank" class="text-blue-500">https://www.linkedin.com/in/renad-alsuhibany</a></p>
+    </div>
+    <div class="flex-1 bg-blue-50 dark:bg-blue-900 p-4 rounded-lg shadow-lg">
+      <h4 class="font-bold mb-2">Get in Touch</h4>
+      <p>Feel free to reach out via email, GitHub, or LinkedIn. I'm open to collaborations, freelance projects, or just saying hi!</p>
+    </div>
+  </div>
+</section>
+
+<script>
+const cyberImages = [
+  "images/cybersecurity-path/مقدمة في الأمن السيبراني_page-0001.jpg",
+  "images/cybersecurity-path/مقدمة في Kali Linux_page-0001.jpg",
+  "images/cybersecurity-path/أمن الشبكات 101 _page-0001.jpg",
+  "images/cybersecurity-path/التهديدات والثغرات والهجمات في الأمن السيبراني_page-0001.jpg",
+  "images/cybersecurity-path/Secure Shell (SSH) 101_page-0001.jpg",
+  "images/cybersecurity-path/Network Programming 101_page-0001.jpg",
+  "images/cybersecurity-path/Linux_ Files and Permissions_page-0001.jpg",
+  "images/cybersecurity-path/Linux 101_page-0001.jpg"
+];
+
+const cyberTitles = [
+  "مقدمة في الأمن السيبراني",
+  "مقدمة في Kali Linux",
+  "أمن الشبكات 101",
+  "التهديدات والثغرات والهجمات في الأمن السيبراني",
+  "Secure Shell (SSH) 101",
+  "Network Programming 101",
+  "Linux Files and Permissions",
+  "Linux 101"
+];
+
+let cyberIndex = 0;
+const cyberSlider = document.getElementById("cyberSlider");
+const cyberTitle = document.getElementById("cyberTitle");
+
+// أول صورة تظهر مباشرة عند الدخول
+cyberSlider.src = cyberImages[cyberIndex];
+cyberTitle.textContent = cyberTitles[cyberIndex];
+
+function nextCyber() {
+  cyberIndex = (cyberIndex + 1) % cyberImages.length;
+  cyberSlider.src = cyberImages[cyberIndex];
+  cyberTitle.textContent = cyberTitles[cyberIndex];
+}
+
+function prevCyber() {
+  cyberIndex = (cyberIndex - 1 + cyberImages.length) % cyberImages.length;
+  cyberSlider.src = cyberImages[cyberIndex];
+  cyberTitle.textContent = cyberTitles[cyberIndex];
+}
+
+
+
+  // Image Zoom Modal
+const modal = document.getElementById("imgModal");
+const modalImg = document.getElementById("modalImg");
+const closeModal = document.getElementById("closeModal");
+
+document.querySelectorAll(".zoomable").forEach(img => {
+  img.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    modalImg.src = img.src;
+  });
+});
+
+closeModal.addEventListener("click", () => {
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+});
+
+  // Navigation
+  function showSection(id){
+    document.querySelectorAll('section').forEach(sec=>sec.classList.add('hidden'));
+    const sec=document.getElementById(id);
+    sec.classList.remove('hidden'); sec.classList.add('active');
+    sec.scrollIntoView({behavior:'smooth'});
+    document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+    document.querySelector(`nav a[onclick="showSection('${id}')"]`).classList.add('active');
+  }
+
+  // Dark Mode
+  const darkToggle=document.getElementById("darkToggle");
+  darkToggle.addEventListener("click",()=>{
+    document.body.classList.toggle("dark");
+    darkToggle.textContent=document.body.classList.contains("dark")?"☀ Light Mode":"🌙 Dark Mode";
+  });
+
+  // Random Fact
+  const facts=[
+    "I love exploring cybersecurity challenges and solving them.",
+    "Coffee fuels my coding sessions.",
+    "Building projects is my way to learn.",
+    "Protecting data and networks gives me satisfaction.",
+    "I love learning how hackers think to stay one step ahead."
+  ];
+  document.getElementById("randomFact").textContent=facts[Math.floor(Math.random()*facts.length)];
+
+  // Typing Effect
+  const title="Hi! I'm Renad Abdulkarim Alsuhibany";
+  let index=0;
+  function typeTitle(){
+    if(index<title.length){
+      document.getElementById("typingTitle").textContent+=title.charAt(index);
+      index++; setTimeout(typeTitle,200);
+    }
+  }
+  typeTitle();
+
+  // Projects Data
+const projectsData = [
+  {
+    name: "🚁 Drone Management & Monitoring System",
+    desc: `Software Engineering Course Project
+
+Designed and developed a structured drone management system as part of a university Software Engineering course. 
+The project focused on system analysis, requirement documentation, and architectural design following SDLC principles.
+
+Key Contributions:
+• Conducted detailed requirement analysis and prepared Software Requirements Specification (SRS).
+• Designed UML diagrams (Use Case, Sequence, Activity Diagrams).
+• Contributed to system architecture and workflow design.
+• Applied structured software engineering methodologies in a team environment.
+
+Skills Demonstrated:
+System Analysis, UML Modeling, Software Architecture Design, Team Collaboration, Documentation.`,
+    github: "#",
+    demo: "#"
+  },
+  {
+    name: "⚡ Smart Energy Optimization System",
+    desc: `Hackathon Project
+
+Developed an innovative solution aimed at reducing electricity consumption during peak hours by scheduling AI model training workloads on GPUs and integrating Phase Change Material (PCM) cooling batteries.
+
+Key Contributions:
+• Proposed workload scheduling strategy to shift intensive AI training outside peak demand hours.
+• Integrated energy optimization concepts to enhance grid stability.
+• Contributed to solution modeling and feasibility discussion.
+
+Skills Demonstrated:
+Problem-Solving, Energy Optimization Thinking, AI Workload Management Concepts, Innovation, Team Collaboration.`,
+    github: "#",
+    demo: "#"
+  },
+  {
+    name: "💻 Front-End Web Application (React)",
+    desc: `Tuwaiq Academy%20Training Project
+
+Designed and built a responsive web application using modern front-end technologies with a focus on clean UI structure and component-based architecture.
+
+Key Contributions:
+• Developed reusable components using React.
+• Implemented responsive layouts using HTML & CSS.
+• Structured the application for scalability and maintainability.
+
+Technologies:
+HTML, CSS, JavaScript, React.
+
+Skills Demonstrated:
+Front-End Development, UI Design Principles, Component Architecture.`,
+    github: "#",
+    demo: "#"
+  },
+  {
+    name: "📊 Data Analytics Project",
+    desc: `Google Data Analytics Program
+
+Completed a full data analysis lifecycle project including data cleaning, transformation, analysis, and visualization.
+
+Key Contributions:
+• Cleaned and prepared raw datasets.
+• Conducted exploratory data analysis (EDA).
+• Built dashboards and visual reports for insight communication.
+
+Tools Used:
+Excel, SQL, Tableau.
+
+Skills Demonstrated:
+Analytical Thinking, Data Visualization, Insight Generation, Business-Oriented Analysis.`,
+    github: "#",
+    demo: "#"
+  },
+   {
+    name: "🌸 Flowerd Ordering Database Syste",
+    desc: `Database Design Course Project
+
+Designed and implemented a relational database system inspired by a real-world flower ordering platform. The project focused on structured database modeling, normalization, and efficient SQL query development.
+
+Key Contributions:
+ • Designed a complete Entity-Relationship (ER) diagram.
+ • Built a fully normalized relational schema.
+ • Implemented tables, primary and foreign key constraints.
+ • Developed advanced SQL queries using JOIN, GROUP BY, HAVING, and subqueries.
+ • Applied database optimization and integrity principles.
+
+Skills Demonstrated:
+Database Design, Data Modeling, SQL Development, Query Optimization, Analytical Thinking.`,
+    github: "#",
+    demo: "#"
+  },
+   {
+    name: "🌐 Small-Scale LAN Network Implementation",
+    desc: `Computer Networks Project
+
+Designed and implemented a real small-scale Local Area Network (LAN) environment as part of a university networking project. The project involved hands-on configuration of networking devices and practical application of core networking concepts.
+
+Key Contributions:
+ • Configured IP addressing scheme and subnetting.
+ • Implemented routing and switching fundamentals.
+ • Connected and configured networking devices in a physical LAN setup.
+ • Tested end-to-end connectivity between hosts.
+ • Performed network troubleshooting and resolved configuration issues.
+
+Skills Demonstrated:
+Network Configuration, TCP/IP, Subnetting, Routing & Switching Fundamentals, Network Troubleshooting, Practical CCNA-Level Knowledge.`,
+    github: "#",
+    demo: "#"
+  },
+   {
+    name: "🔐 Algorithm & Cryptography Implementation Project",
+    desc: `Algorithms & Security Concepts Project
+
+Implemented and analyzed multiple algorithmic and cryptographic techniques to evaluate performance and security efficiency.
+
+Key Contributions:
+ • Implemented two algorithmic approaches and compared time complexity.
+ • Developed two cryptographic techniques to understand encryption principles.
+ • Analyzed computational efficiency and security trade-offs.
+
+Skills Demonstrated:
+Algorithm Analysis, Time Complexity Evaluation, Cryptography Fundamentals, Logical Thinking.`,
+    github: "#",
+    demo: "#"
+  }
+];
+
+// Rendering Projects Dynamically
+const projectsContainer = document.getElementById("projectsContainer");
+projectsContainer.innerHTML = ""; 
+projectsData.forEach(p => {
+  const div = document.createElement("div");
+  div.className = "card";
+  div.innerHTML = `
+    <h3 class="font-bold mb-2">${p.name}</h3>
+    <p style="white-space: pre-line;">${p.desc}</p>
+    <a href="${p.github}" target="_blank">GitHub</a> | <a href="${p.demo}" target="_blank">Live Demo</a>
+  `;
+  projectsContainer.appendChild(div);
+});
+
+</script>
+
+</body>
+</html> 
