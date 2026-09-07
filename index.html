@@ -1,570 +1,2265 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Renad Portfolio</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-:root { --bg:#f3f4f6; --text:#111827; --card:#ffffff; --accent:#3b82f6; }
-body.dark { --bg:#1e1e2f; --text:#f0f0f0; --card:#2c2c3d; --accent:#60a5fa; }
-body { background-color:var(--bg); color:var(--text); font-family:Arial, sans-serif; margin:0; transition:0.3s; scroll-behavior:smooth; }
-nav { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; background-color:var(--card); box-shadow:0 4px 10px rgba(0,0,0,0.1); position:sticky; top:0; z-index:10; border-bottom:1px solid rgba(0,0,0,0.05); }
-nav a { margin:0 0.5rem; cursor:pointer; font-weight:500; transition:0.3s; }
-nav a:hover, nav a.active { color:var(--accent); font-weight:bold; }
-section { padding:6rem 2rem; opacity:0; transition:opacity 0.6s ease; }
-section.active { opacity:1; }
-.card { background-color:var(--card); padding:1.5rem; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.1); transition:transform 0.3s; }
-.card:hover { transform:translateY(-5px); box-shadow:0 12px 25px rgba(0,0,0,0.2); }
-.skills, .projects, .certificates { display:flex; flex-wrap:wrap; gap:1.5rem; }
-.skills .card, .projects .card, .certificates .card { flex:1 1 220px; }
-.fact { font-style:italic; margin-top:1rem; font-size:1.1rem; }
-button { cursor:pointer; padding:0.5rem 1rem; border-radius:8px; border:none; background-color:var(--accent); color:white; font-weight:bold; transition:0.3s; }
-button:hover { background-color:#2563eb; }
-.skills-bar {
-  height: 15px;
-  border-radius: 12px;
-  background-color: #e5e7eb; 
-  overflow: hidden;
-  margin-top: 0.5rem;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.skills-fill {
-  height: 100%;
-  border-radius: 12px;
-  background: linear-gradient(90deg, #3b82f6, #60a5fa); 
-  color: white;
-  font-weight: bold;
-  text-align: right;
-  padding-right: 6px;
-  line-height: 15px;
-  width: 0;
-  animation: fillAnim 1s ease forwards; /* Animation */
-}
+    <title>Renad Alsuhibany | Cybersecurity Portfolio</title>
 
-@keyframes fillAnim {
-  0% { width: 0; }
-  100% { width: var(--fill-width); } 
-}
+    <script src="https://cdn.tailwindcss.com"></script>
 
-.certificates img { 
-  width:100%; 
-  height:300px; 
-  object-fit:contain; 
-  border-radius:12px; 
-  transition:0.3s; 
-}
-#cyberSlider {
-  width:100%;
-  height:300px;
-  object-fit:contain;
-  border-radius:12px;
-}
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        navy: "#0f172a",
+                        blueaccent: "#2563eb"
+                    }
+                }
+            }
+        };
+    </script>
 
-.certificates img:hover { transform:scale(1.05); }
-input, textarea { width:100%; padding:0.5rem; margin-top:0.5rem; border-radius:6px; border:1px solid #ccc; background-color:var(--card); color:var(--text); }
-h2::after { content:""; display:block; width:60px; height:3px; background:var(--accent); margin-top:6px; border-radius:2px; }
-.certificates .card {
-  min-height: 300px; 
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
 
-</style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark {
+            background: #0b1120;
+            color: #e5e7eb;
+        }
+
+        /* ================= HERO ANIMATION ================= */
+
+        .hero-animate {
+            opacity: 0;
+            transform: translateY(25px);
+            animation: heroFadeUp 1s ease-out forwards;
+        }
+
+        .hero-animate.delay-1 {
+            animation-delay: 0.15s;
+        }
+
+        .hero-animate.delay-2 {
+            animation-delay: 0.3s;
+        }
+
+        .hero-animate.delay-3 {
+            animation-delay: 0.45s;
+        }
+
+        @keyframes heroFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            backdrop-filter: blur(14px);
+            background: rgba(255, 255, 255, 0.88);
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        body.dark .navbar {
+            background: rgba(11, 17, 32, 0.9);
+            border-color: #1e293b;
+        }
+
+        .nav-link {
+            position: relative;
+            color: #475569;
+            transition: 0.25s ease;
+        }
+
+        body.dark .nav-link {
+            color: #cbd5e1;
+        }
+
+        .nav-link:hover {
+            color: #2563eb;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+            width: 0;
+            height: 2px;
+            background: #2563eb;
+            transition: width 0.25s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero-gradient {
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(37, 99, 235, 0.12),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 20% 80%,
+                    rgba(59, 130, 246, 0.08),
+                    transparent 30%
+                );
+        }
+
+        .hero-title {
+            letter-spacing: -0.03em;
+        }
+
+        .hero-description {
+            max-width: 650px;
+        }
+
+        /* ================= SECTIONS ================= */
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 48px;
+            height: 3px;
+            border-radius: 999px;
+            background: #2563eb;
+        }
+
+        /* ================= CARDS ================= */
+
+        .card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        body.dark .card {
+            background: #111827;
+            border-color: #1e293b;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
+            border-color: #bfdbfe;
+        }
+
+        body.dark .card:hover {
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+            border-color: #2563eb;
+        }
+
+        /* ================= SKILLS ================= */
+
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 13px;
+            border-radius: 999px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #dbeafe;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        body.dark .skill-tag {
+            background: #172554;
+            color: #bfdbfe;
+            border-color: #1e3a8a;
+        }
+
+        /* ================= PROJECTS ================= */
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-card .project-content {
+            flex: 1;
+        }
+
+        .project-number {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        body.dark .project-number {
+            background: #172554;
+            color: #93c5fd;
+        }
+
+        /* ================= CERTIFICATES ================= */
+
+        .certificate-image {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+        }
+
+        .certificate-image:hover {
+            transform: scale(1.02);
+        }
+
+        .cyber-path-card {
+            cursor: pointer;
+        }
+
+        .cyber-path-preview {
+            height: 190px;
+            border-radius: 12px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37, 99, 235, 0.12),
+                    rgba(15, 23, 42, 0.05)
+                );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.dark .cyber-path-preview {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37, 99, 235, 0.20),
+                    rgba(15, 23, 42, 0.40)
+                );
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .github-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 15px;
+            border-radius: 9px;
+            background: #0f172a;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.25s ease;
+        }
+
+        .github-button:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        body.dark .github-button {
+            background: #1e293b;
+        }
+
+        body.dark .github-button:hover {
+            background: #2563eb;
+        }
+
+        .primary-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-weight: 600;
+            transition: 0.25s ease;
+        }
+
+        .primary-button:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .secondary-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border: 1px solid #cbd5e1;
+            color: #334155;
+            font-weight: 600;
+            transition: 0.25s ease;
+        }
+
+        body.dark .secondary-button {
+            border-color: #334155;
+            color: #e2e8f0;
+        }
+
+        .secondary-button:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+
+        /* ================= MODALS ================= */
+
+        .modal {
+            background: rgba(0, 0, 0, 0.88);
+        }
+
+        .modal-certificate {
+            width: 100%;
+            max-width: 850px;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 14px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.show {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-menu {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 0;
+            }
+
+            .hero-title {
+                font-size: 2.7rem;
+            }
+        }
+    </style>
 </head>
-
-<div id="imgModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
-  <span id="closeModal" class="absolute top-6 right-10 text-white text-4xl cursor-pointer">&times;</span>
-  <img id="modalImg" class="max-h-[90%] max-w-[90%] rounded-lg shadow-2xl">
-</div>
 
 <body>
 
+<!-- ================= NAVBAR ================= -->
 
-<nav>
-  <div class="text-2xl font-bold tracking-wide">Renad Portfolio</div>
-  <div>
-    <a onclick="showSection('about')" class="active">About</a>
-    <a onclick="showSection('skills')">Skills</a>
-    <a onclick="showSection('projects')">Projects</a>
-    <a onclick="showSection('certificates')">Certificates</a>
-    <a onclick="showSection('contact')">Contact</a>
-    <button id="darkToggle">🌙 Dark Mode</button>
-  </div>
-</nav>
+<header class="navbar fixed top-0 left-0 right-0 z-40">
+
+    <nav class="max-w-6xl mx-auto px-5 py-4">
+
+        <div class="flex items-center justify-between">
+
+            <a
+                href="#home"
+                class="text-xl font-bold tracking-tight text-blue-600 dark:text-blue-400">
+                Renad.
+            </a>
+
+            <div class="desktop-nav hidden md:flex items-center gap-7">
+
+                <a href="#about" class="nav-link text-sm font-medium">
+                    About
+                </a>
+
+                <a href="#skills" class="nav-link text-sm font-medium">
+                    Skills
+                </a>
+
+                <a href="#projects" class="nav-link text-sm font-medium">
+                    Projects
+                </a>
+
+                <a href="#certifications" class="nav-link text-sm font-medium">
+                    Certifications
+                </a>
+
+                <a href="#education" class="nav-link text-sm font-medium">
+                    Education
+                </a>
+
+                <a href="#contact" class="nav-link text-sm font-medium">
+                    Contact
+                </a>
+
+                <button
+                    id="themeToggle"
+                    class="ml-2 w-10 h-10 rounded-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:border-blue-500 transition"
+                    aria-label="Toggle dark mode">
+                    🌙
+                </button>
+
+            </div>
+
+            <div class="md:hidden flex items-center gap-2">
+
+                <button
+                    id="themeToggleMobile"
+                    class="w-10 h-10 rounded-lg border border-slate-200 dark:border-slate-700">
+                    🌙
+                </button>
+
+                <button
+                    id="menuToggle"
+                    class="w-10 h-10 rounded-lg border border-slate-200 dark:border-slate-700">
+                    ☰
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Mobile Menu -->
+
+        <div id="mobileMenu" class="mobile-menu md:hidden">
+
+            <a href="#about" class="nav-link">
+                About
+            </a>
+
+            <a href="#skills" class="nav-link">
+                Skills
+            </a>
+
+            <a href="#projects" class="nav-link">
+                Projects
+            </a>
+
+            <a href="#certifications" class="nav-link">
+                Certifications
+            </a>
+
+            <a href="#education" class="nav-link">
+                Education
+            </a>
+
+            <a href="#contact" class="nav-link">
+                Contact
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
 
 
-<section id="about" class="active">
-  <h2 class="text-4xl font-bold mb-4"><span id="typingTitle"></span></h2>
-  <p class="text-lg leading-relaxed">IT student | cybersecurity path/security Enthusiast | Data-Driven Thinker
+<!-- ================= HERO ================= -->
 
-I am an Information Technology student at Princess Nourah bint Abdulrahman University, with a strong academic record . I am passionate about cybersecurity path/security, data analytics, and software development.
+<main>
 
-I enjoy transforming ideas into practical solutions, participating in hackathons, and working within collaborative environments where innovation and problem-solving are valued. my goal is to contribute to impactful technical projects while continuously developing my technical and analytical skills.
+<section
+    id="home"
+    class="hero-gradient min-h-screen flex items-center pt-28 pb-20">
 
-I believe in consistency, curiosity, and creating real value in every team I join.</p>
-  <p class="fact" id="randomFact"></p>
+    <div class="max-w-6xl mx-auto px-5 w-full">
+
+        <div class="grid md:grid-cols-[1.3fr_0.7fr] gap-12 items-center">
+
+            <!-- HERO TEXT -->
+
+            <div>
+
+                <p class="hero-animate text-blue-600 dark:text-blue-400 font-semibold text-lg mb-4">
+                    Welcome to my portfolio
+                </p>
+
+                <h1
+                    class="hero-animate delay-1 hero-title text-5xl md:text-6xl font-bold leading-tight mb-5">
+
+                    Hi, I'm Renad Alsuhibany.
+
+                </h1>
+
+                <p
+                    class="hero-animate delay-2 text-xl md:text-2xl font-medium text-slate-600 dark:text-slate-300 mb-6">
+
+                    Information Technology Student · Cybersecurity
+
+                </p>
+
+                <p
+                    class="hero-animate delay-3 hero-description text-lg text-slate-600 dark:text-slate-400 leading-8 mb-8">
+
+                    Interested in security operations, network security,
+                    threat detection, and developing practical defensive
+                    security solutions.
+
+                </p>
+
+                <div
+                    class="hero-animate delay-3 flex flex-wrap gap-3">
+
+                    <a
+                        href="#projects"
+                        class="primary-button">
+
+                        View My Projects →
+
+                    </a>
+
+                    <a
+                        href="#contact"
+                        class="secondary-button">
+
+                        Get in Touch
+
+                    </a>
+
+                </div>
+
+                <div
+                    class="hero-animate delay-3 flex gap-5 mt-8">
+
+                    <a
+                        href="https://github.com/renadalsuhibany"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-slate-500 hover:text-blue-600 transition font-medium">
+
+                        GitHub ↗
+
+                    </a>
+
+                    <a
+                        href="https://www.linkedin.com/in/renad-alsuhibany"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-slate-500 hover:text-blue-600 transition font-medium">
+
+                        LinkedIn ↗
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- HERO VISUAL -->
+
+            <div class="hidden md:flex justify-center">
+
+                <div class="relative">
+
+                    <div
+                        class="w-72 h-72 rounded-3xl bg-blue-600 flex items-center justify-center shadow-2xl">
+
+                        <div
+                            class="w-60 h-60 rounded-2xl bg-slate-900 flex items-center justify-center">
+
+                            <div class="text-center text-white">
+
+                                <div class="text-6xl mb-4">
+                                    🛡️
+                                </div>
+
+                                <p class="font-semibold text-lg">
+                                    Cybersecurity
+                                </p>
+
+                                <p class="text-slate-400 text-sm mt-1">
+                                    Security • Networks • Defense
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
-<section id="skills" class="hidden">
-  <h2 class="text-4xl font-bold mb-6">Skills</h2>
-
-  <h3 class="text-2xl font-semibold mb-2 mt-4">Networking Skills</h3>
-  <div class="skills flex flex-wrap gap-4">
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Protocols & Models</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:93%">93%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>IP Addressing & Subnetting</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:98%">98%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Routing & Switching Fundamentals</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:95%">95%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>OSI & TCP/IP Models</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
-    </div>
-  </div>
 
 
-  <h3 class="text-2xl font-semibold mb-2 mt-6">cybersecurity path/security Skills</h3>
-  <div class="skills flex flex-wrap gap-4">
-    <div class="card flex-1 min-w-[220px]">
-      <h4>cybersecurity path/security Fundamentals</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:98%">98%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Network Security</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Linux (Kali)</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:93%">93%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Log Monitoring & Threat Analysis</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:75%">75%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Common Attack Types Understanding</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
-    </div>
-  </div>
+<!-- ================= ABOUT ================= -->
 
+<section id="about" class="py-24">
 
-  <h3 class="text-2xl font-semibold mb-2 mt-6">Data & Analytical Skills</h3>
-  <div class="skills flex flex-wrap gap-4">
-    <div class="card flex-1 min-w-[220px]">
-      <h4>SQL</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Excel</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:95%">95%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Power BI</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Tableau Dashboards</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:75%">75%</div></div>
-    </div>
-  </div>
+    <div class="max-w-6xl mx-auto px-5">
 
+        <div class="max-w-3xl">
 
-  <h3 class="text-2xl font-semibold mb-2 mt-6">Programming Skills</h3>
-  <div class="skills flex flex-wrap gap-4">
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Python</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Java</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>HTML</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>CSS</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>JavaScript</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:75%">75%</div></div>
-    </div>
-  </div>
+            <p class="text-blue-600 font-semibold mb-3">
+                About Me
+            </p>
 
+            <h2 class="section-title text-4xl font-bold mb-12">
+                Building my foundation in Cybersecurity
+            </h2>
 
-  <h3 class="text-2xl font-semibold mb-2 mt-6">Tools & Platforms</h3>
-  <div class="skills flex flex-wrap gap-4">
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Git & GitHub</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>VS Code</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Oracle Database</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:80%">80%</div></div>
-    </div>
-  </div>
+            <p class="text-lg leading-8 text-slate-600 dark:text-slate-400">
 
+                I am an Information Technology student at Princess Nourah
+                bint Abdulrahman University, specializing in Cybersecurity.
+                I am particularly interested in security operations,
+                network security, threat detection, and defensive security.
 
-  <h3 class="text-2xl font-semibold mb-2 mt-6">Soft Skills & Professional Strengths</h3>
-  <div class="skills flex flex-wrap gap-4">
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Teamwork</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:95%">95%</div></div>
+            </p>
+
+            <p class="text-lg leading-8 text-slate-600 dark:text-slate-400 mt-5">
+
+                Through university projects, technical training, certifications,
+                and hands-on labs, I continue to develop my technical knowledge
+                and practical problem-solving skills. I enjoy working on
+                projects that allow me to understand how systems and networks
+                work and how they can be monitored and protected.
+
+            </p>
+
+        </div>
+
     </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Communication</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:90%">90%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Problem Solving</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
-    </div>
-    <div class="card flex-1 min-w-[220px]">
-      <h4>Time Management</h4>
-      <div class="skills-bar"><div class="skills-fill" style="--fill-width:85%">85%</div></div>
-    </div>
-  </div>
+
 </section>
 
 
+<!-- ================= SKILLS ================= -->
 
-<section id="projects" class="hidden">
-  <h2 class="text-4xl font-bold mb-6">Projects</h2>
-  <div class="projects" id="projectsContainer"></div>
+<section
+    id="skills"
+    class="py-24 bg-slate-50 dark:bg-slate-950">
+
+    <div class="max-w-6xl mx-auto px-5">
+
+        <p class="text-blue-600 font-semibold mb-3">
+            Technical Skills
+        </p>
+
+        <h2 class="section-title text-4xl font-bold mb-14">
+            Skills & Technologies
+        </h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+
+            <!-- CYBERSECURITY -->
+
+            <div class="card p-7">
+
+                <div class="text-3xl mb-4">
+                    🛡️
+                </div>
+
+                <h3 class="text-xl font-bold mb-5">
+                    Cybersecurity
+                </h3>
+
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="skill-tag">Security+ Concepts</span>
+                    <span class="skill-tag">Security Monitoring</span>
+                    <span class="skill-tag">Threat Detection</span>
+                    <span class="skill-tag">Network Security</span>
+                    <span class="skill-tag">Security Fundamentals</span>
+                    <span class="skill-tag">Log Analysis</span>
+                    <span class="skill-tag">Linux Security</span>
+                    <span class="skill-tag">Kali Linux</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- NETWORKING -->
+
+            <div class="card p-7">
+
+                <div class="text-3xl mb-4">
+                    🌐
+                </div>
+
+                <h3 class="text-xl font-bold mb-5">
+                    Networking
+                </h3>
+
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="skill-tag">TCP/IP</span>
+                    <span class="skill-tag">OSI Model</span>
+                    <span class="skill-tag">IP Addressing</span>
+                    <span class="skill-tag">Subnetting</span>
+                    <span class="skill-tag">Routing</span>
+                    <span class="skill-tag">Switching</span>
+                    <span class="skill-tag">Network Troubleshooting</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECURITY TOOLS -->
+
+            <div class="card p-7">
+
+                <div class="text-3xl mb-4">
+                    🔎
+                </div>
+
+                <h3 class="text-xl font-bold mb-5">
+                    Security Tools
+                </h3>
+
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="skill-tag">Wazuh</span>
+                    <span class="skill-tag">ELK</span>
+                    <span class="skill-tag">Suricata</span>
+                    <span class="skill-tag">pfSense</span>
+                    <span class="skill-tag">Linux</span>
+                    <span class="skill-tag">Kali Linux</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROGRAMMING -->
+
+            <div class="card p-7">
+
+                <div class="text-3xl mb-4">
+                    💻
+                </div>
+
+                <h3 class="text-xl font-bold mb-5">
+                    Programming & Web
+                </h3>
+
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">React</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- DATABASES -->
+
+            <div class="card p-7">
+
+                <div class="text-3xl mb-4">
+                    🗄️
+                </div>
+
+                <h3 class="text-xl font-bold mb-5">
+                    Databases & Data
+                </h3>
+
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Oracle Database</span>
+                    <span class="skill-tag">Excel</span>
+                    <span class="skill-tag">Tableau</span>
+                    <span class="skill-tag">Data Analysis</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOOLS -->
+
+            <div class="card p-7">
+
+                <div class="text-3xl mb-4">
+                    ⚙️
+                </div>
+
+                <h3 class="text-xl font-bold mb-5">
+                    Tools & Platforms
+                </h3>
+
+                <div class="flex flex-wrap gap-2">
+
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">GitHub</span>
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">VirtualBox</span>
+                    <span class="skill-tag">Microsoft Office</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
 
-<section id="certificates" class="hidden">
-  <h2 class="text-4xl font-bold mb-6">Certificates</h2>
-  <p class="mb-6 text-lg leading-relaxed">
- I have completed several professional certifications and technical training programs to strengthen my knowledge in cybersecurity, networking, data analytics, and software development.
-  These certifications reflect my commitment to continuous learning and professional growth.
+<!-- ================= PROJECTS ================= -->
 
-  </p>
-  <div class="certificates">
-    <div class="card"><img src="images/5803065854663527575_121.jpg"class="zoomable" alt="Certificate 1"><h4 class="font-bold mt-2"> Google Data Analytics</h4><p>Google</p></div>
-    <div class="card"><img src="images/5803065854663527864_121.jpg"class="zoomable" alt="Certificate 2"><h4 class="font-bold mt-2">CCNA</h4><p>Cisco</p></div>
-    <div class="card"><img src="images/5803065854663527581_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Oracle Database Foundations</h4><p>Oracle</p></div>
-     <div class="card"><img src="images/5803065854663527580_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Oracle Java Certification</h4><p>Oracle</p></div>
-     <div class="card"><img src="images/6010589702215813400_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">cybersecurity path/security Fundamentals</h4><p>Tuwaiq Academy</p></div>
-      <div class="card"><img src="images/5803065854663527571_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Raspberry pi Fundamentals</h4><p>Tuwaiq Academy</p></div>
-       <div class="card"><img src="images/5803065854663527863_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Front-End Development using React </h4><p>Tuwaiq Academy</p></div>
-        <div class="card"><img src="images/5803065854663527578_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Excel Essential Training</h4><p>LinkedIn Learning</p></div>
-        <div class="card"><img src="images/5803065854663527856_120.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Volunteer with Keswat farah</h4><p>Keswat farah</p></div>
-<div class="card"><img src="images/5803065854663527577_120.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Intro to Financial Sustainability</h4><p>BSF</p></div>
-<div class="card"><img src="images/5803065854663527576_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Entrepreneurship Learning Pathway</h4><p>LinkedIn Learning</p></div>
-<div class="card"><img src="images/5803065854663527574_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Fundamentals of Product Management</h4><p>Barmajon</p></div>
-<div class="card"><img src="images/5803065854663527572_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Fundamentals of Artificial Intelligence</h4><p>SDAIA</p></div>
-<div class="card"><img src="images/5803065854663527570_121.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Quantum Computing For Everyone</h4><p>Coursera</p></div>
-<div class="card"><img src="images/M3aarf_Certificate_page-0001.jpg"class="zoomable" alt="Certificate 3"><h4 class="font-bold mt-2">Information Security</h4><p>Maarf</p></div>
+<section id="projects" class="py-24">
 
-<div class="card relative">
-  <img id="cyberSlider" 
-       src="images/cybersecurity-path/Linux-101_page-0001.jpg"
-       class="zoomable w-full h-40 object-cover rounded-lg">
+    <div class="max-w-6xl mx-auto px-5">
 
-  <button onclick="prevCyber()" 
-    class="absolute left-2 top-1/2 -translate-y-1/2 bg-white px-2 py-1 rounded shadow">
-    ◀
-  </button>
+        <p class="text-blue-600 font-semibold mb-3">
+            Selected Work
+        </p>
 
-  <button onclick="nextCyber()" 
-    class="absolute right-2 top-1/2 -translate-y-1/2 bg-white px-2 py-1 rounded shadow">
-    ▶
-  </button>
-  
-  <h4 id="cyberTitle" class="font-bold mt-2">Cybersecurity Path</h4>
-  <p id="cyberDesc">Sater</p>
+        <h2 class="section-title text-4xl font-bold mb-5">
+            Projects
+        </h2>
+
+        <p class="max-w-2xl text-slate-600 dark:text-slate-400 mb-12">
+
+            A selection of university, training, and hands-on projects
+            that reflect my interests in cybersecurity, networking,
+            software development, and data.
+
+        </p>
+
+
+        <div class="grid md:grid-cols-2 gap-6">
+
+
+            <!-- PROJECT 1 -->
+
+            <article class="card project-card p-7">
+
+                <div class="project-content">
+
+                    <div class="flex items-start justify-between gap-4 mb-5">
+
+                        <div class="project-number">
+                            01
+                        </div>
+
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                            Cybersecurity
+                        </span>
+
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-3">
+                        Security Monitoring & Threat Detection Lab
+                    </h3>
+
+                    <p class="text-slate-600 dark:text-slate-400 leading-7">
+
+                        A hands-on Blue Team security lab focused on
+                        security monitoring, log collection, network
+                        visibility, and threat detection.
+
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mt-5">
+
+                        <span class="skill-tag">Wazuh</span>
+                        <span class="skill-tag">ELK</span>
+                        <span class="skill-tag">Suricata</span>
+                        <span class="skill-tag">pfSense</span>
+                        <span class="skill-tag">Linux</span>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-7">
+
+                    <a
+                        href="https://github.com/renadalsuhibany/security-monitoring-threat-detection-lab"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="github-button">
+
+                        GitHub ↗
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 2 -->
+
+            <article class="card project-card p-7">
+
+                <div class="project-content">
+
+                    <div class="flex items-start justify-between gap-4 mb-5">
+
+                        <div class="project-number">
+                            02
+                        </div>
+
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                            Cryptography
+                        </span>
+
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-3">
+                        Algorithm & Cryptography Implementation
+                    </h3>
+
+                    <p class="text-slate-600 dark:text-slate-400 leading-7">
+
+                        A university project involving algorithm
+                        implementation, time-complexity analysis,
+                        and practical implementation of cryptographic
+                        techniques.
+
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mt-5">
+
+                        <span class="skill-tag">Algorithms</span>
+                        <span class="skill-tag">Time Complexity</span>
+                        <span class="skill-tag">Cryptography</span>
+                        <span class="skill-tag">Security Concepts</span>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-7">
+
+                    <a
+                        href="#"
+                        class="github-button">
+
+                        GitHub ↗
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 3 -->
+
+            <article class="card project-card p-7">
+
+                <div class="project-content">
+
+                    <div class="flex items-start justify-between gap-4 mb-5">
+
+                        <div class="project-number">
+                            03
+                        </div>
+
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                            Networking
+                        </span>
+
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-3">
+                        Small-Scale LAN Network Implementation
+                    </h3>
+
+                    <p class="text-slate-600 dark:text-slate-400 leading-7">
+
+                        A university networking project involving IP
+                        addressing, subnetting, routing, switching,
+                        connectivity testing, and network troubleshooting.
+
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mt-5">
+
+                        <span class="skill-tag">TCP/IP</span>
+                        <span class="skill-tag">Subnetting</span>
+                        <span class="skill-tag">Routing</span>
+                        <span class="skill-tag">Switching</span>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-7">
+
+                    <a
+                        href="#"
+                        class="github-button">
+
+                        GitHub ↗
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 4 -->
+
+            <article class="card project-card p-7">
+
+                <div class="project-content">
+
+                    <div class="flex items-start justify-between gap-4 mb-5">
+
+                        <div class="project-number">
+                            04
+                        </div>
+
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                            Database Security
+                        </span>
+
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-3">
+                        Database Security & Administration
+                    </h3>
+
+                    <p class="text-slate-600 dark:text-slate-400 leading-7">
+
+                        An academic project focused on installing,
+                        configuring, and securing a MySQL database server
+                        as part of a secure IT infrastructure. My role was
+                        Database Administrator (DBA), responsible for
+                        database installation, configuration, and security.
+
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mt-5">
+
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Database Administration</span>
+                        <span class="skill-tag">Database Security</span>
+                        <span class="skill-tag">Server Configuration</span>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-7">
+
+                    <a
+                        href="#"
+                        class="github-button">
+
+                        GitHub ↗
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 5 -->
+
+            <article class="card project-card p-7">
+
+                <div class="project-content">
+
+                    <div class="flex items-start justify-between gap-4 mb-5">
+
+                        <div class="project-number">
+                            05
+                        </div>
+
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                            Software Engineering
+                        </span>
+
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-3">
+                        Drone Management & Monitoring System
+                    </h3>
+
+                    <p class="text-slate-600 dark:text-slate-400 leading-7">
+
+                        A university Software Engineering project focused
+                        on requirements analysis, SRS documentation,
+                        UML modeling, system workflow, and software
+                        architecture.
+
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mt-5">
+
+                        <span class="skill-tag">SRS</span>
+                        <span class="skill-tag">UML</span>
+                        <span class="skill-tag">System Analysis</span>
+                        <span class="skill-tag">SDLC</span>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-7">
+
+                    <a
+                        href="#"
+                        class="github-button">
+
+                        GitHub ↗
+
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROJECT 6 -->
+
+            <article class="card project-card p-7">
+
+                <div class="project-content">
+
+                    <div class="flex items-start justify-between gap-4 mb-5">
+
+                        <div class="project-number">
+                            06
+                        </div>
+
+                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                            Project Management
+                        </span>
+
+                    </div>
+
+                    <h3 class="text-2xl font-bold mb-3">
+                        Agile Project Management – Sella
+                    </h3>
+
+                    <p class="text-slate-600 dark:text-slate-400 leading-7">
+
+                        An academic project focused on planning and managing
+                        the Sella platform using Agile and Scrum methodologies,
+                        including project requirements, scope definition,
+                        sprint planning, scheduling, roles and responsibilities,
+                        and risk management.
+
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mt-5">
+
+                        <span class="skill-tag">Agile</span>
+                        <span class="skill-tag">Scrum</span>
+                        <span class="skill-tag">Sprint Planning</span>
+                        <span class="skill-tag">WBS</span>
+                        <span class="skill-tag">RACI</span>
+                        <span class="skill-tag">Risk Management</span>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-7">
+
+                    <a
+                        href="https://github.com/Renadalsuhibany/agile-project-management-sella"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="github-button">
+
+                        GitHub ↗
+
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CERTIFICATIONS ================= -->
+
+<section
+    id="certifications"
+    class="py-24 bg-slate-50 dark:bg-slate-950">
+
+    <div class="max-w-6xl mx-auto px-5">
+
+        <p class="text-blue-600 font-semibold mb-3">
+            Professional Development
+        </p>
+
+        <h2 class="section-title text-4xl font-bold mb-5">
+            Certifications
+        </h2>
+
+        <p class="max-w-2xl text-slate-600 dark:text-slate-400 mb-12">
+
+            Certifications and technical training completed across
+            cybersecurity, networking, data analytics, programming,
+            and technology.
+
+        </p>
+
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+
+            <!-- SECURITY+ -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/CompTIA Security+ ce certificate_page-0001.jpg"
+                    class="certificate-image zoomable"
+                    alt="CompTIA Security+">
+
+                <h3 class="font-bold text-lg mt-5">
+                    CompTIA Security+
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    CompTIA
+                </p>
+
+                <span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                    Cybersecurity
+                </span>
+
+            </div>
+
+
+            <!-- CAPM -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/PMI Certification_page-0001.jpg"
+                    class="certificate-image zoomable"
+                    alt="CAPM">
+
+                <h3 class="font-bold text-lg mt-5">
+                    CAPM®
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Project Management Institute
+                </p>
+
+                <span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                    Project Management
+                </span>
+
+            </div>
+
+
+            <!-- CISCO -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5834572270163136427_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="Junior Cybersecurity Analyst Career Path Exam">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Junior Cybersecurity Analyst Career Path Exam
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Cisco
+                </p>
+
+                <span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                    Cybersecurity
+                </span>
+
+            </div>
+
+
+            <!-- GOOGLE DATA -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5803065854663527575_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="Google Data Analytics Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Google Data Analytics
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Google
+                </p>
+
+            </div>
+
+
+            <!-- CCNA -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5803065854663527864_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="CCNA Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    CCNA
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Cisco
+                </p>
+
+            </div>
+
+
+            <!-- ORACLE DATABASE -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5803065854663527581_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="Oracle Database Foundations Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Oracle Database Foundations
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Oracle
+                </p>
+
+            </div>
+
+
+            <!-- ORACLE JAVA -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5803065854663527580_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="Oracle Java Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Oracle Java Certification
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Oracle
+                </p>
+
+            </div>
+
+
+            <!-- TUWAIQ CYBER -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/6010589702215813400_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="Cybersecurity Fundamentals Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Cybersecurity Fundamentals
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Tuwaiq Academy
+                </p>
+
+            </div>
+
+
+            <!-- REACT -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5803065854663527863_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="React Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Front-End Development using React
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Tuwaiq Academy
+                </p>
+
+            </div>
+
+
+            <!-- RASPBERRY PI -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5803065854663527571_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="Raspberry Pi Fundamentals Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Raspberry Pi Fundamentals
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Tuwaiq Academy
+                </p>
+
+            </div>
+
+
+            <!-- EXCEL -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5803065854663527578_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="Excel Essential Training Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Excel Essential Training
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    LinkedIn Learning
+                </p>
+
+            </div>
+
+
+            <!-- INFORMATION SECURITY -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/M3aarf_Certificate_page-0001.jpg"
+                    class="certificate-image zoomable"
+                    alt="Information Security Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Information Security
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Maarf
+                </p>
+
+            </div>
+
+
+            <!-- AI -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5803065854663527572_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="Artificial Intelligence Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Fundamentals of Artificial Intelligence
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    SDAIA
+                </p>
+
+            </div>
+
+
+            <!-- QUANTUM -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5803065854663527570_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="Quantum Computing Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Quantum Computing For Everyone
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Coursera
+                </p>
+
+            </div>
+
+
+            <!-- FINANCIAL -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5803065854663527577_120.jpg"
+                    class="certificate-image zoomable"
+                    alt="Financial Sustainability Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Intro to Financial Sustainability
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    BSF
+                </p>
+
+            </div>
+
+
+            <!-- ENTREPRENEURSHIP -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5803065854663527576_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="Entrepreneurship Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Entrepreneurship Learning Pathway
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    LinkedIn Learning
+                </p>
+
+            </div>
+
+
+            <!-- PRODUCT MANAGEMENT -->
+
+            <div class="card p-5">
+
+                <img
+                    src="my certificates/5803065854663527574_121.jpg"
+                    class="certificate-image zoomable"
+                    alt="Product Management Certificate">
+
+                <h3 class="font-bold text-lg mt-5">
+                    Fundamentals of Product Management
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Barmajon
+                </p>
+
+            </div>
+
+
+            <!-- CYBERSECURITY PATH -->
+
+            <div
+                class="card cyber-path-card p-5"
+                onclick="openCyberPath()">
+
+                <div class="cyber-path-preview">
+
+                    <div class="text-center">
+
+                        <div class="text-5xl mb-3">
+                            🔐
+                        </div>
+
+                        <p class="font-bold text-xl">
+                            Cybersecurity Path
+                        </p>
+
+                        <p class="text-blue-600 dark:text-blue-400 font-semibold mt-1">
+                            Sater
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <h3 class="font-bold text-lg mt-5">
+                    Cybersecurity Path
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-1">
+                    Sater Platform
+                </p>
+
+                <p class="text-blue-600 dark:text-blue-400 text-sm font-semibold mt-4">
+                    View certificates →
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= EDUCATION ================= -->
+
+<section id="education" class="py-24">
+
+    <div class="max-w-6xl mx-auto px-5">
+
+        <p class="text-blue-600 font-semibold mb-3">
+            Education
+        </p>
+
+        <h2 class="section-title text-4xl font-bold mb-12">
+            Academic Background
+        </h2>
+
+
+        <div class="card p-8 max-w-3xl">
+
+            <div class="flex gap-5">
+
+                <div class="project-number flex-shrink-0">
+                    🎓
+                </div>
+
+                <div>
+
+                    <h3 class="text-2xl font-bold">
+                        Princess Nourah bint Abdulrahman University
+                    </h3>
+
+                    <p class="text-blue-600 font-semibold mt-2">
+                        Bachelor of Information Technology
+                    </p>
+
+                    <p class="text-slate-600 dark:text-slate-400 mt-2">
+                        Specialization: Cybersecurity
+                    </p>
+
+                    <p class="text-slate-500 dark:text-slate-500 mt-3">
+                        Expected Graduation: 2027
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section
+    id="contact"
+    class="py-24 bg-slate-50 dark:bg-slate-950">
+
+    <div class="max-w-6xl mx-auto px-5">
+
+        <div class="max-w-3xl">
+
+            <p class="text-blue-600 font-semibold mb-3">
+                Contact
+            </p>
+
+            <h2 class="section-title text-4xl font-bold mb-8">
+                Let's Connect
+            </h2>
+
+            <p class="text-lg leading-8 text-slate-600 dark:text-slate-400 mb-8">
+
+                I am currently building my experience in cybersecurity
+                and looking forward to opportunities where I can learn,
+                contribute, and develop my technical skills.
+
+            </p>
+
+        </div>
+
+
+        <div class="grid md:grid-cols-3 gap-5">
+
+
+            <!-- EMAIL -->
+
+            <a
+                href="mailto:Renadsuh@icloud.com"
+                class="card p-6 hover:border-blue-400">
+
+                <div class="text-3xl mb-4">
+                    ✉️
+                </div>
+
+                <h3 class="font-bold text-lg">
+                    Email
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-2 break-all">
+                    Renadsuh@icloud.com
+                </p>
+
+            </a>
+
+
+            <!-- GITHUB -->
+
+            <a
+                href="https://github.com/renadalsuhibany"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="card p-6 hover:border-blue-400">
+
+                <div class="text-3xl mb-4">
+                    💻
+                </div>
+
+                <h3 class="font-bold text-lg">
+                    GitHub
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-2">
+                    View my projects
+                </p>
+
+            </a>
+
+
+            <!-- LINKEDIN -->
+
+            <a
+                href="https://www.linkedin.com/in/renad-alsuhibany"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="card p-6 hover:border-blue-400">
+
+                <div class="text-3xl mb-4">
+                    💼
+                </div>
+
+                <h3 class="font-bold text-lg">
+                    LinkedIn
+                </h3>
+
+                <p class="text-slate-500 dark:text-slate-400 mt-2">
+                    Connect with me
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="border-t border-slate-200 dark:border-slate-800 py-8">
+
+    <div class="max-w-6xl mx-auto px-5">
+
+        <div class="flex flex-col md:flex-row justify-between gap-4 items-center">
+
+            <p class="text-sm text-slate-500">
+                © 2026 Renad Alsuhibany. All rights reserved.
+            </p>
+
+            <div class="flex gap-5 text-sm">
+
+                <a
+                    href="https://github.com/renadalsuhibany"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-slate-500 hover:text-blue-600">
+
+                    GitHub
+
+                </a>
+
+                <a
+                    href="https://www.linkedin.com/in/renad-alsuhibany"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-slate-500 hover:text-blue-600">
+
+                    LinkedIn
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= IMAGE MODAL ================= -->
+
+<div
+    id="imageModal"
+    class="modal fixed inset-0 z-50 hidden items-center justify-center p-5">
+
+    <button
+        id="closeModal"
+        class="absolute top-5 right-7 text-white text-4xl hover:text-blue-300">
+
+        ×
+
+    </button>
+
+    <img
+        id="modalImage"
+        src=""
+        alt="Certificate Preview"
+        class="modal-certificate shadow-2xl">
+
 </div>
 
 
+<!-- ================= CYBERSECURITY PATH MODAL ================= -->
+
+<div
+    id="cyberModal"
+    class="modal fixed inset-0 z-50 hidden items-center justify-center p-5">
+
+    <button
+        onclick="closeCyberPath()"
+        class="absolute top-5 right-7 text-white text-4xl hover:text-blue-300">
+
+        ×
+
+    </button>
+
+
+    <div
+        class="bg-white dark:bg-slate-900 rounded-2xl max-w-5xl w-full p-7 max-h-[90vh] overflow-y-auto">
+
+        <h3 class="text-2xl font-bold mb-2">
+            Cybersecurity Path
+        </h3>
+
+        <p class="text-slate-500 dark:text-slate-400 mb-7">
+            Sater technical courses
+        </p>
+
+
+        <div class="grid sm:grid-cols-2 gap-5">
+
+
+            <div>
+
+                <img
+                    src="my certificates/cybersecurity path/Linux 101_page-0001.jpg"
+                    class="certificate-image zoomable"
+                    alt="Linux 101">
+
+                <p class="font-semibold mt-3">
+                    Linux 101
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <img
+                    src="my certificates/cybersecurity path/Linux_ Files and Permissions_page-0001.jpg"
+                    class="certificate-image zoomable"
+                    alt="Linux Files and Permissions">
+
+                <p class="font-semibold mt-3">
+                    Linux: Files and Permissions
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <img
+                    src="my certificates/cybersecurity path/مقدمة في Kali Linux_page-0001.jpg"
+                    class="certificate-image zoomable"
+                    alt="Introduction to Kali Linux">
+
+                <p class="font-semibold mt-3">
+                    Introduction to Kali Linux
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <img
+                    src="my certificates/cybersecurity path/Network Programming 101_page-0001.jpg"
+                    class="certificate-image zoomable"
+                    alt="Network Programming 101">
+
+                <p class="font-semibold mt-3">
+                    Network Programming 101
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <img
+                    src="my certificates/cybersecurity path/Secure Shell (SSH) 101_page-0001.jpg"
+                    class="certificate-image zoomable"
+                    alt="Secure Shell SSH 101">
+
+                <p class="font-semibold mt-3">
+                    Secure Shell (SSH) 101
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <img
+                    src="my certificates/cybersecurity path/التهديدات والثغرات والهجمات في الأمن السيبراني_page-0001.jpg"
+                    class="certificate-image zoomable"
+                    alt="Threats Vulnerabilities and Attacks in Cybersecurity">
+
+                <p class="font-semibold mt-3">
+                    Threats, Vulnerabilities & Attacks in Cybersecurity
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <img
+                    src="my certificates/cybersecurity path/أمن الشبكات 101 _page-0001.jpg"
+                    class="certificate-image zoomable"
+                    alt="Network Security 101">
+
+                <p class="font-semibold mt-3">
+                    Network Security 101
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <img
+                    src="my certificates/cybersecurity path/مقدمة في الأمن السيبراني_page-0001.jpg"
+                    class="certificate-image zoomable"
+                    alt="Introduction to Cybersecurity">
+
+                <p class="font-semibold mt-3">
+                    Introduction to Cybersecurity
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
 
-</div>
-
-
-  </div>
-</section>
-
-
-<section id="contact" class="hidden">
-  <h2 class="text-4xl font-bold mb-6">Contact Me</h2>
-  <div class="card flex flex-col md:flex-row items-center gap-6 p-6">
-    <div class="flex flex-col items-center md:items-start">
-    
-      <h3 class="text-xl font-bold">Renad alsuhibany</h3>
-      <p class="text-gray-500 mb-2">IT student</p>
-      <p>Email: <a href="mailto:Renadsuh@icloud.com" class="text-blue-500">Renadsuh@icloud.com</a></p>
-      <p>Phone: <a href="tel:+966 570086584" class="text-blue-500">+966 570086584</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/renad-alsuhibany" target="_blank" class="text-blue-500">https://www.linkedin.com/in/renad-alsuhibany</a></p>
-      <p>GitHub: <a href="https://github.com/renadalsuhibany" target="_blank" class="text-blue-500">https://github.com/renadalsuhibany</a></p>
-      
-    </div>
-    <div class="flex-1 bg-blue-50 dark:bg-blue-900 p-4 rounded-lg shadow-lg">
-      <h4 class="font-bold mb-2">Get in Touch</h4>
-      <p>Feel free to reach out via email, GitHub, or LinkedIn. I'm open to collaborations, freelance projects, or just saying hi!</p>
-    </div>
-  </div>
-</section>
+<!-- ================= JAVASCRIPT ================= -->
 
 <script>
-const cyberImages = [
-  "images/cybersecurity-path/مقدمة في الأمن السيبراني_page-0001.jpg",
-  "images/cybersecurity-path/مقدمة في Kali Linux_page-0001.jpg",
-  "images/cybersecurity-path/أمن الشبكات 101 _page-0001.jpg",
-  "images/cybersecurity-path/التهديدات والثغرات والهجمات في الأمن السيبراني_page-0001.jpg",
-  "images/cybersecurity-path/Secure Shell (SSH) 101_page-0001.jpg",
-  "images/cybersecurity-path/Network Programming 101_page-0001.jpg",
-  "images/cybersecurity-path/Linux_ Files and Permissions_page-0001.jpg",
-  "images/cybersecurity-path/Linux 101_page-0001.jpg"
-];
 
-const cyberTitles = [
-  "مقدمة في الأمن السيبراني",
-  "مقدمة في Kali Linux",
-  "أمن الشبكات 101",
-  "التهديدات والثغرات والهجمات في الأمن السيبراني",
-  "Secure Shell (SSH) 101",
-  "Network Programming 101",
-  "Linux Files and Permissions",
-  "Linux 101"
-];
+    /* ================= DARK MODE ================= */
 
-let cyberIndex = 0;
-const cyberSlider = document.getElementById("cyberSlider");
-const cyberTitle = document.getElementById("cyberTitle");
+    const body = document.body;
 
-  cyberSlider.src = cyberImages[cyberIndex];
-cyberTitle.textContent = cyberTitles[cyberIndex];
-
-function nextCyber() {
-  cyberIndex = (cyberIndex + 1) % cyberImages.length;
-  cyberSlider.src = cyberImages[cyberIndex];
-  cyberTitle.textContent = cyberTitles[cyberIndex];
-}
-
-function prevCyber() {
-  cyberIndex = (cyberIndex - 1 + cyberImages.length) % cyberImages.length;
-  cyberSlider.src = cyberImages[cyberIndex];
-  cyberTitle.textContent = cyberTitles[cyberIndex];
-}
+    const themeToggle = document.getElementById("themeToggle");
+    const themeToggleMobile =
+        document.getElementById("themeToggleMobile");
 
 
+    function toggleTheme() {
 
- 
-const modal = document.getElementById("imgModal");
-const modalImg = document.getElementById("modalImg");
-const closeModal = document.getElementById("closeModal");
+        body.classList.toggle("dark");
 
-document.querySelectorAll(".zoomable").forEach(img => {
-  img.addEventListener("click", () => {
-    modal.classList.remove("hidden");
-    modal.classList.add("flex");
-    modalImg.src = img.src;
-  });
-});
+        const isDark =
+            body.classList.contains("dark");
 
-closeModal.addEventListener("click", () => {
-  modal.classList.add("hidden");
-  modal.classList.remove("flex");
-});
+        themeToggle.textContent =
+            isDark ? "☀️" : "🌙";
 
-  function showSection(id){
-    document.querySelectorAll('section').forEach(sec=>sec.classList.add('hidden'));
-    const sec=document.getElementById(id);
-    sec.classList.remove('hidden'); sec.classList.add('active');
-    sec.scrollIntoView({behavior:'smooth'});
-    document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
-    document.querySelector(`nav a[onclick="showSection('${id}')"]`).classList.add('active');
-  }
+        themeToggleMobile.textContent =
+            isDark ? "☀️" : "🌙";
 
-  
-  const darkToggle=document.getElementById("darkToggle");
-  darkToggle.addEventListener("click",()=>{
-    document.body.classList.toggle("dark");
-    darkToggle.textContent=document.body.classList.contains("dark")?"☀ Light Mode":"🌙 Dark Mode";
-  });
+        localStorage.setItem(
+            "theme",
+            isDark ? "dark" : "light"
+        );
 
- 
-  const facts=[
-    "Coffee fuels my coding sessions.",
-    "Building projects is my way to learn.",
-    "I love exploring cybersecurity challenges and solving them.",
-    "Protecting data and networks gives me satisfaction.",
-    "I love learning how hackers think to stay one step ahead."
-  ];
-  document.getElementById("randomFact").textContent=facts[Math.floor(Math.random()*facts.length)];
-
-  
-  const title="Hi! I'm Renad Abdulkarim Alsuhibany";
-  let index=0;
-  function typeTitle(){
-    if(index<title.length){
-      document.getElementById("typingTitle").textContent+=title.charAt(index);
-      index++; setTimeout(typeTitle,200);
     }
-  }
-  typeTitle();
 
 
-const projectsData = [
-  {
-    name: "🚁 Drone Management & Monitoring System",
-    desc: `Software Engineering Course Project
+    themeToggle.addEventListener(
+        "click",
+        toggleTheme
+    );
 
-Designed and developed a structured drone management system as part of a university Software Engineering course. 
-The project focused on system analysis, requirement documentation, and architectural design following SDLC principles.
-
-Key Contributions:
-• Conducted detailed requirement analysis and prepared Software Requirements Specification (SRS).
-• Designed UML diagrams (Use Case, Sequence, Activity Diagrams).
-• Contributed to system architecture and workflow design.
-• Applied structured software engineering methodologies in a team environment.
-
-Skills Demonstrated:
-System Analysis, UML Modeling, Software Architecture Design, Team Collaboration, Documentation.`,
-    github: "#",
-    demo: "#"
-  },
-  {
-    name: "⚡ Smart Energy Optimization System",
-    desc: `Hackathon Project
-
-Developed an innovative solution aimed at reducing electricity consumption during peak hours by scheduling AI model training workloads on GPUs and integrating Phase Change Material (PCM) cooling batteries.
-
-Key Contributions:
-• Proposed workload scheduling strategy to shift intensive AI training outside peak demand hours.
-• Integrated energy optimization concepts to enhance grid stability.
-• Contributed to solution modeling and feasibility discussion.
-
-Skills Demonstrated:
-Problem-Solving, Energy Optimization Thinking, AI Workload Management Concepts, Innovation, Team Collaboration.`,
-    github: "#",
-    demo: "#"
-  },
-  {
-    name: "💻 Front-End Web Application (React)",
-    desc: `Tuwaiq Academy Training Project
-
-Designed and built a responsive web application using modern front-end technologies with a focus on clean UI structure and component-based architecture.
-
-Key Contributions:
-• Developed reusable components using React.
-• Implemented responsive layouts using HTML & CSS.
-• Structured the application for scalability and maintainability.
-
-Technologies:
-HTML, CSS, JavaScript, React.
-
-Skills Demonstrated:
-Front-End Development, UI Design Principles, Component Architecture.`,
-    github: "#",
-    demo: "#"
-  },
-  {
-    name: "📊 Data Analytics Project",
-    desc: `Google Data Analytics Program
-
-Completed a full data analysis lifecycle project including data cleaning, transformation, analysis, and visualization.
-
-Key Contributions:
-• Cleaned and prepared raw datasets.
-• Conducted exploratory data analysis (EDA).
-• Built dashboards and visual reports for insight communication.
-
-Tools Used:
-Excel, SQL, Tableau.
-
-Skills Demonstrated:
-Analytical Thinking, Data Visualization, Insight Generation, Business-Oriented Analysis.`,
-    github: "#",
-    demo: "#"
-  },
-   {
-    name: "🌸 Flowerd Ordering Database Syste",
-    desc: `Database Design Course Project
-
-Designed and implemented a relational database system inspired by a real-world flower ordering platform. The project focused on structured database modeling, normalization, and efficient SQL query development.
-
-Key Contributions:
- • Designed a complete Entity-Relationship (ER) diagram.
- • Built a fully normalized relational schema.
- • Implemented tables, primary and foreign key constraints.
- • Developed advanced SQL queries using JOIN, GROUP BY, HAVING, and subqueries.
- • Applied database optimization and integrity principles.
-
-Skills Demonstrated:
-Database Design, Data Modeling, SQL Development, Query Optimization, Analytical Thinking.`,
-    github: "#",
-    demo: "#"
-  },
-   {
-    name: "🌐 Small-Scale LAN Network Implementation",
-    desc: `Computer Networks Project
-
-Designed and implemented a real small-scale Local Area Network (LAN) environment as part of a university networking project. The project involved hands-on configuration of networking devices and practical application of core networking concepts.
-
-Key Contributions:
- • Configured IP addressing scheme and subnetting.
- • Implemented routing and switching fundamentals.
- • Connected and configured networking devices in a physical LAN setup.
- • Tested end-to-end connectivity between hosts.
- • Performed network troubleshooting and resolved configuration issues.
-
-Skills Demonstrated:
-Network Configuration, TCP/IP, Subnetting, Routing & Switching Fundamentals, Network Troubleshooting, Practical CCNA-Level Knowledge.`,
-    github: "#",
-    demo: "#"
-  },
-   {
-    name: "🔐 Algorithm & Cryptography Implementation Project",
-    desc: `Algorithms & Security Concepts Project
-
-Implemented and analyzed multiple algorithmic and cryptographic techniques to evaluate performance and security efficiency.
-
-Key Contributions:
- • Implemented two algorithmic approaches and compared time complexity.
- • Developed two cryptographic techniques to understand encryption principles.
- • Analyzed computational efficiency and security trade-offs.
-
-Skills Demonstrated:
-Algorithm Analysis, Time Complexity Evaluation, Cryptography Fundamentals, Logical Thinking.`,
-    github: "#",
-    demo: "#"
-  }
-];
+    themeToggleMobile.addEventListener(
+        "click",
+        toggleTheme
+    );
 
 
-const projectsContainer = document.getElementById("projectsContainer");
-projectsContainer.innerHTML = ""; 
-projectsData.forEach(p => {
-  const div = document.createElement("div");
-  div.className = "card";
-  div.innerHTML = `
-    <h3 class="font-bold mb-2">${p.name}</h3>
-    <p style="white-space: pre-line;">${p.desc}</p>
-    <a href="${p.github}" target="_blank">GitHub</a> | <a href="${p.demo}" target="_blank">Live Demo</a>
-  `;
-  projectsContainer.appendChild(div);
-});
+    if (localStorage.getItem("theme") === "dark") {
+
+        body.classList.add("dark");
+
+        themeToggle.textContent = "☀️";
+        themeToggleMobile.textContent = "☀️";
+
+    }
+
+
+    /* ================= MOBILE MENU ================= */
+
+    const menuToggle =
+        document.getElementById("menuToggle");
+
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
+
+    menuToggle.addEventListener(
+        "click",
+        () => {
+
+            mobileMenu.classList.toggle("show");
+
+            menuToggle.textContent =
+                mobileMenu.classList.contains("show")
+                    ? "✕"
+                    : "☰";
+
+        }
+    );
+
+
+    document
+        .querySelectorAll("#mobileMenu a")
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    mobileMenu.classList.remove("show");
+
+                    menuToggle.textContent = "☰";
+
+                }
+            );
+
+        });
+
+
+    /* ================= IMAGE MODAL ================= */
+
+    const imageModal =
+        document.getElementById("imageModal");
+
+    const modalImage =
+        document.getElementById("modalImage");
+
+    const closeModal =
+        document.getElementById("closeModal");
+
+
+    function attachImageListeners() {
+
+        document
+            .querySelectorAll(".zoomable")
+            .forEach(image => {
+
+                image.addEventListener(
+                    "click",
+                    () => {
+
+                        modalImage.src = image.src;
+
+                        imageModal.classList.remove("hidden");
+
+                        imageModal.classList.add("flex");
+
+                    }
+                );
+
+            });
+
+    }
+
+
+    attachImageListeners();
+
+
+    closeModal.addEventListener(
+        "click",
+        () => {
+
+            imageModal.classList.add("hidden");
+
+            imageModal.classList.remove("flex");
+
+            modalImage.src = "";
+
+        }
+    );
+
+
+    imageModal.addEventListener(
+        "click",
+        event => {
+
+            if (event.target === imageModal) {
+
+                imageModal.classList.add("hidden");
+
+                imageModal.classList.remove("flex");
+
+                modalImage.src = "";
+
+            }
+
+        }
+    );
+
+
+    /* ================= CYBERSECURITY PATH ================= */
+
+    const cyberModal =
+        document.getElementById("cyberModal");
+
+
+    function openCyberPath() {
+
+        cyberModal.classList.remove("hidden");
+
+        cyberModal.classList.add("flex");
+
+    }
+
+
+    function closeCyberPath() {
+
+        cyberModal.classList.add("hidden");
+
+        cyberModal.classList.remove("flex");
+
+    }
+
+
+    cyberModal.addEventListener(
+        "click",
+        event => {
+
+            if (event.target === cyberModal) {
+
+                closeCyberPath();
+
+            }
+
+        }
+    );
+
+
+    /* ================= ESCAPE KEY ================= */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key === "Escape") {
+
+                imageModal.classList.add("hidden");
+
+                imageModal.classList.remove("flex");
+
+                cyberModal.classList.add("hidden");
+
+                cyberModal.classList.remove("flex");
+
+                modalImage.src = "";
+
+            }
+
+        }
+    );
 
 </script>
 
 </body>
-</html> 
+</html>
