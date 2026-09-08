@@ -172,7 +172,28 @@
             background: #111827;
             border-color: #1e293b;
         }
+.hero-description {
+    max-width: 650px;
+}
 
+.hero-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: wordReveal 0.25s ease-out forwards;
+}
+
+@keyframes wordReveal {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
@@ -385,7 +406,24 @@
         }
     </style>
 </head>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const description = document.getElementById("heroDescription");
 
+    const text = description.textContent.trim();
+    const words = text.split(/\s+/);
+
+    description.innerHTML = words
+        .map((word, index) =>
+            `<span class="hero-word" style="animation-delay: ${index * 0.045}s">${word}</span> `
+        )
+        .join("");
+
+    setTimeout(() => {
+        description.classList.add("animate");
+    }, 250);
+});
+</script>
 <body>
 
 <!-- ================= NAVBAR ================= -->
@@ -524,14 +562,9 @@
 
                 </p>
 
-                <p
-                    class="hero-animate delay-3 hero-description text-lg text-slate-600 dark:text-slate-400 leading-8 mb-8">
-
-                    Interested in security operations, network security,
-                    threat detection, and developing practical defensive
-                    security solutions.
-
-                </p>
+   <p id="heroDescription" class="hero-description text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
+    Interested in security operations, network security, threat detection, and developing practical defensive security solutions.
+</p>
 
                 <div
                     class="hero-animate delay-3 flex flex-wrap gap-3">
@@ -669,182 +702,212 @@
 
 <!-- ================= SKILLS ================= -->
 
-<section
-    id="skills"
-    class="py-24 bg-slate-50 dark:bg-slate-950">
+<section 
+    id="skills" 
+    class="py-24 bg-slate-50 dark:bg-slate-950"> 
 
-    <div class="max-w-6xl mx-auto px-5">
+    <div class="max-w-6xl mx-auto px-5"> 
 
-        <p class="text-blue-600 font-semibold mb-3">
-            Technical Skills
-        </p>
+        <p class="text-blue-600 font-semibold mb-3"> 
+            Technical Skills 
+        </p> 
 
-        <h2 class="section-title text-4xl font-bold mb-14">
-            Skills & Technologies
-        </h2>
+        <h2 class="section-title text-4xl font-bold mb-14"> 
+            Skills & Technologies 
+        </h2> 
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"> 
 
 
             <!-- CYBERSECURITY -->
 
-            <div class="card p-7">
+            <div class="card p-7"> 
 
-                <div class="text-3xl mb-4">
-                    🛡️
-                </div>
+                <div class="text-3xl mb-4"> 
+                    🛡️ 
+                </div> 
 
-                <h3 class="text-xl font-bold mb-5">
-                    Cybersecurity
-                </h3>
+                <h3 class="text-xl font-bold mb-5"> 
+                    Cybersecurity 
+                </h3> 
 
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2"> 
 
-                    <span class="skill-tag">Security+ Concepts</span>
-                    <span class="skill-tag">Security Monitoring</span>
-                    <span class="skill-tag">Threat Detection</span>
-                    <span class="skill-tag">Network Security</span>
-                    <span class="skill-tag">Security Fundamentals</span>
-                    <span class="skill-tag">Log Analysis</span>
-                    <span class="skill-tag">Linux Security</span>
-                    <span class="skill-tag">Kali Linux</span>
+                    <span class="skill-tag">Security+ Concepts</span> 
+                    <span class="skill-tag">Security Monitoring</span> 
+                    <span class="skill-tag">Threat Detection</span> 
+                    <span class="skill-tag">Network Security</span> 
+                    <span class="skill-tag">Security Fundamentals</span> 
+                    <span class="skill-tag">Log Analysis</span> 
+                    <span class="skill-tag">Linux Security</span> 
+                    <span class="skill-tag">Kali Linux</span> 
 
-                </div>
+                </div> 
 
-            </div>
+            </div> 
 
 
             <!-- NETWORKING -->
 
-            <div class="card p-7">
+            <div class="card p-7"> 
 
-                <div class="text-3xl mb-4">
-                    🌐
-                </div>
+                <div class="text-3xl mb-4"> 
+                    🌐 
+                </div> 
 
-                <h3 class="text-xl font-bold mb-5">
-                    Networking
-                </h3>
+                <h3 class="text-xl font-bold mb-5"> 
+                    Networking 
+                </h3> 
 
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2"> 
 
-                    <span class="skill-tag">TCP/IP</span>
-                    <span class="skill-tag">OSI Model</span>
-                    <span class="skill-tag">IP Addressing</span>
-                    <span class="skill-tag">Subnetting</span>
-                    <span class="skill-tag">Routing</span>
-                    <span class="skill-tag">Switching</span>
-                    <span class="skill-tag">Network Troubleshooting</span>
+                    <span class="skill-tag">TCP/IP</span> 
+                    <span class="skill-tag">OSI Model</span> 
+                    <span class="skill-tag">IP Addressing</span> 
+                    <span class="skill-tag">Subnetting</span> 
+                    <span class="skill-tag">Routing</span> 
+                    <span class="skill-tag">Switching</span> 
+                    <span class="skill-tag">Network Troubleshooting</span> 
 
-                </div>
+                </div> 
 
-            </div>
+            </div> 
 
 
             <!-- SECURITY TOOLS -->
 
-            <div class="card p-7">
+            <div class="card p-7"> 
 
-                <div class="text-3xl mb-4">
-                    🔎
-                </div>
+                <div class="text-3xl mb-4"> 
+                    🔎 
+                </div> 
 
-                <h3 class="text-xl font-bold mb-5">
-                    Security Tools
-                </h3>
+                <h3 class="text-xl font-bold mb-5"> 
+                    Security Tools 
+                </h3> 
 
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2"> 
 
-                    <span class="skill-tag">Wazuh</span>
-                    <span class="skill-tag">ELK</span>
-                    <span class="skill-tag">Suricata</span>
-                    <span class="skill-tag">pfSense</span>
-                    <span class="skill-tag">Linux</span>
-                    <span class="skill-tag">Kali Linux</span>
+                    <span class="skill-tag">Wazuh</span> 
+                    <span class="skill-tag">ELK</span> 
+                    <span class="skill-tag">Suricata</span> 
+                    <span class="skill-tag">pfSense</span> 
+                    <span class="skill-tag">Linux</span> 
+                    <span class="skill-tag">Kali Linux</span> 
 
-                </div>
+                </div> 
 
-            </div>
+            </div> 
+
+
+            <!-- PROJECT MANAGEMENT -->
+
+            <div class="card p-7"> 
+
+                <div class="text-3xl mb-4"> 
+                    📋 
+                </div> 
+
+                <h3 class="text-xl font-bold mb-5"> 
+                    Project Management 
+                </h3> 
+
+                <div class="flex flex-wrap gap-2"> 
+
+                    <span class="skill-tag">Agile</span> 
+                    <span class="skill-tag">Scrum</span> 
+                    <span class="skill-tag">Project Planning</span> 
+                    <span class="skill-tag">Sprint Planning</span> 
+                    <span class="skill-tag">WBS</span> 
+                    <span class="skill-tag">RACI</span> 
+                    <span class="skill-tag">Risk Management</span> 
+                    <span class="skill-tag">Gantt Charts</span> 
+
+                </div> 
+
+            </div> 
 
 
             <!-- PROGRAMMING -->
 
-            <div class="card p-7">
+            <div class="card p-7"> 
 
-                <div class="text-3xl mb-4">
-                    💻
-                </div>
+                <div class="text-3xl mb-4"> 
+                    💻 
+                </div> 
 
-                <h3 class="text-xl font-bold mb-5">
-                    Programming & Web
-                </h3>
+                <h3 class="text-xl font-bold mb-5"> 
+                    Programming & Web 
+                </h3> 
 
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2"> 
 
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">HTML</span>
-                    <span class="skill-tag">CSS</span>
-                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Python</span> 
+                    <span class="skill-tag">Java</span> 
+                    <span class="skill-tag">JavaScript</span> 
+                    <span class="skill-tag">HTML</span> 
+                    <span class="skill-tag">CSS</span> 
+                    <span class="skill-tag">React</span> 
 
-                </div>
+                </div> 
 
-            </div>
+            </div> 
 
 
-            <!-- DATABASES -->
+            <!-- DATABASES & DATA -->
 
-            <div class="card p-7">
+            <div class="card p-7"> 
 
-                <div class="text-3xl mb-4">
-                    🗄️
-                </div>
+                <div class="text-3xl mb-4"> 
+                    🗄️ 
+                </div> 
 
-                <h3 class="text-xl font-bold mb-5">
-                    Databases & Data
-                </h3>
+                <h3 class="text-xl font-bold mb-5"> 
+                    Databases & Data 
+                </h3> 
 
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2"> 
 
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Oracle Database</span>
-                    <span class="skill-tag">Excel</span>
-                    <span class="skill-tag">Tableau</span>
-                    <span class="skill-tag">Data Analysis</span>
+                    <span class="skill-tag">SQL</span> 
+                    <span class="skill-tag">Oracle Database</span> 
+                    <span class="skill-tag">Excel</span> 
+                    <span class="skill-tag">Power BI</span> 
+                    <span class="skill-tag">Tableau</span> 
+                    <span class="skill-tag">Data Analysis</span> 
 
-                </div>
+                </div> 
 
-            </div>
+            </div> 
 
 
             <!-- TOOLS -->
 
-            <div class="card p-7">
+            <div class="card p-7"> 
 
-                <div class="text-3xl mb-4">
-                    ⚙️
-                </div>
+                <div class="text-3xl mb-4"> 
+                    ⚙️ 
+                </div> 
 
-                <h3 class="text-xl font-bold mb-5">
-                    Tools & Platforms
-                </h3>
+                <h3 class="text-xl font-bold mb-5"> 
+                    Tools & Platforms 
+                </h3> 
 
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2"> 
 
-                    <span class="skill-tag">Git</span>
-                    <span class="skill-tag">GitHub</span>
-                    <span class="skill-tag">VS Code</span>
-                    <span class="skill-tag">VirtualBox</span>
-                    <span class="skill-tag">Microsoft Office</span>
+                    <span class="skill-tag">Git</span> 
+                    <span class="skill-tag">GitHub</span> 
+                    <span class="skill-tag">VS Code</span> 
+                    <span class="skill-tag">VirtualBox</span> 
+                    <span class="skill-tag">Microsoft Office</span> 
 
-                </div>
+                </div> 
 
-            </div>
+            </div> 
 
-        </div>
 
-    </div>
+        </div> 
+
+    </div> 
 
 </section>
 
@@ -978,11 +1041,17 @@
 
                 <div class="mt-7">
 
+                  
+                <div class="mt-7">
+
                     <a
-                        href="#"
+                        href="https://github.com/Renadalsuhibany/Cryptography-encryption-project.git"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="github-button">
 
                         GitHub ↗
+
 
                     </a>
 
@@ -993,59 +1062,62 @@
 
             <!-- PROJECT 3 -->
 
-            <article class="card project-card p-7">
+          <article class="card project-card p-7">
 
-                <div class="project-content">
+    <div class="project-content">
 
-                    <div class="flex items-start justify-between gap-4 mb-5">
+        <div class="flex items-start justify-between gap-4 mb-5">
 
-                        <div class="project-number">
-                            03
-                        </div>
+            <div class="project-number">
+                03
+            </div>
 
-                        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
-                            Networking
-                        </span>
+            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+                Vulnerability Assessment
+            </span>
 
-                    </div>
+        </div>
 
-                    <h3 class="text-2xl font-bold mb-3">
-                        Small-Scale LAN Network Implementation
-                    </h3>
+        <h3 class="text-2xl font-bold mb-3">
+            Vulnerability Assessment Lab
+        </h3>
 
-                    <p class="text-slate-600 dark:text-slate-400 leading-7">
+        <p class="text-slate-600 dark:text-slate-400 leading-7">
 
-                        A university networking project involving IP
-                        addressing, subnetting, routing, switching,
-                        connectivity testing, and network troubleshooting.
+            Developing a controlled lab to practice asset discovery,
+            service enumeration, vulnerability identification, risk
+            analysis, and security remediation using Linux and network
+            security tools.
 
-                    </p>
+        </p>
 
-                    <div class="flex flex-wrap gap-2 mt-5">
+        <div class="flex flex-wrap gap-2 mt-5">
 
-                        <span class="skill-tag">TCP/IP</span>
-                        <span class="skill-tag">Subnetting</span>
-                        <span class="skill-tag">Routing</span>
-                        <span class="skill-tag">Switching</span>
+            <span class="skill-tag">Linux</span>
+            <span class="skill-tag">Nmap</span>
+            <span class="skill-tag">Vulnerability Assessment</span>
+            <span class="skill-tag">Risk Analysis</span>
+            <span class="skill-tag">Remediation</span>
 
-                    </div>
+        </div>
 
-                </div>
+    </div>
 
-                <div class="mt-7">
+    <div class="mt-7">
 
-                    <a
-                        href="#"
-                        class="github-button">
+        <a
+            href="https://github.com/Renadalsuhibany/vulnerability-assessment-lab.git"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="github-button">
 
-                        GitHub ↗
+            GitHub ↗
 
-                    </a>
+        </a>
 
-                </div>
+    </div>
 
-            </article>
-
+</article>
 
             <!-- PROJECT 4 -->
 
@@ -1089,11 +1161,12 @@
                     </div>
 
                 </div>
-
-                <div class="mt-7">
+  <div class="mt-7">
 
                     <a
-                        href="#"
+                        href="https://github.com/Renadalsuhibany/linux-server-implementation.git"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="github-button">
 
                         GitHub ↗
@@ -1101,6 +1174,7 @@
                     </a>
 
                 </div>
+              
 
             </article>
 
@@ -1146,11 +1220,12 @@
                     </div>
 
                 </div>
-
-                <div class="mt-7">
+  <div class="mt-7">
 
                     <a
-                        href="#"
+                        href="https://github.com/Renadalsuhibany/surea-delivery-drones.git"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         class="github-button">
 
                         GitHub ↗
@@ -1158,6 +1233,7 @@
                     </a>
 
                 </div>
+               
 
             </article>
 
@@ -1346,7 +1422,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     Google
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+    Data Analytics
+</span>
             </div>
 
 
@@ -1366,7 +1444,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     Cisco
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+   Networking
+</span>
             </div>
 
 
@@ -1386,7 +1466,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     Oracle
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+  Database
+</span>
             </div>
 
 
@@ -1406,7 +1488,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     Oracle
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+   Programming
+</span>
             </div>
 
 
@@ -1426,7 +1510,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     Tuwaiq Academy
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+   Cybersecurity
+</span>
             </div>
 
 
@@ -1446,7 +1532,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     Tuwaiq Academy
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+   Web Development
+</span>
             </div>
 
 
@@ -1466,7 +1554,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     Tuwaiq Academy
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+    Technology
+</span>
             </div>
 
 
@@ -1486,7 +1576,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     LinkedIn Learning
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+    Data Analytics
+</span>
             </div>
 
 
@@ -1506,7 +1598,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     Maarf
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+   Cybersecurity
+</span>
             </div>
 
 
@@ -1526,7 +1620,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     SDAIA
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+   Artificial Intelligence
+</span>
             </div>
 
 
@@ -1546,7 +1642,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     Coursera
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+   Technology
+</span>
             </div>
 
 
@@ -1565,7 +1663,9 @@
 
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     BSF
-                </p>
+                <span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+   Finance & Sustainability
+</span></p>
 
             </div>
 
@@ -1586,7 +1686,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     LinkedIn Learning
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+    Entrepreneurship
+</span>
             </div>
 
 
@@ -1606,7 +1708,9 @@
                 <p class="text-slate-500 dark:text-slate-400 mt-1">
                     Barmajon
                 </p>
-
+<span class="inline-block mt-3 text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+    Product Management
+</span>
             </div>
 
 
